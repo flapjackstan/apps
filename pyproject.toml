@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "random-apps"
+version = "0.1.0"
+description = "collection of apps to use for random purposes"
+authors = ["Elmer Camargo"]
+
+packages = [
+    { include= "./timer.py" }
+]
+
+[tool.poetry.scripts]
+timer = "timer:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pygame = "^2.6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+pytest-mock = "^3.14.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 118
+
+[tool.ruff.lint]
+# Enable pycodestyle (`E`), pyflakes (`F`, `W`), pydocstyle (`D`), isort (`I`), ruff (`RUF`) codes.
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "D",   # pydocstyle
+    "I",   # isort
+    "RUF", # ruff
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "ICN", # flake8-import-conventions
+    "FA",  # flake8-future-annotations
+    "C4",  # flake8-comprehensions
+    "A"    # flake8-builtins
+]
+
+fixable = ["ALL"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"

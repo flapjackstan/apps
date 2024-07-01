@@ -27,4 +27,5 @@ jobs:
         shell: bash
         run: poetry install
       - name: Run tests
+        shell: bash
         run: pytest

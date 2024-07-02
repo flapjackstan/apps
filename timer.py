@@ -56,8 +56,8 @@ def start_timers(args: argparse.Namespace) -> None:
         if sub_index < len(subtimers) and elapsed_time >= subtimers[sub_index]:
             minutes, seconds = divmod(subtimers[sub_index], 60)
             print(
-                f"Subtimer {minutes} minute(s) and {seconds} second(s) elapsed\
-                at {time.strftime('%H:%M:%S', time.localtime(time.time()))}!"
+                f"Subtimer {minutes} minute(s) and {seconds} second(s) elapsed "
+                f"at {time.strftime('%H:%M:%S', time.localtime(time.time()))}!"
             )
             play_sound("/Users/elmer/Documents/dev/apps/assets/notification.mp3")
             sub_index += 1
@@ -65,8 +65,8 @@ def start_timers(args: argparse.Namespace) -> None:
         if elapsed_time >= total_seconds:
             minutes, seconds = divmod(total_seconds, 60)
             print(
-                f"Total time {minutes} minute(s) and {seconds} second(s) elapsed\
-                at {time.strftime('%H:%M:%S', time.localtime(time.time()))}!"
+                f"Total time {minutes} minute(s) and {seconds} second(s) elapsed "
+                f"at {time.strftime('%H:%M:%S', time.localtime(time.time()))}!"
             )
             play_sound("/Users/elmer/Documents/dev/apps/assets/notification.mp3")
             break

@@ -1,4 +1,5 @@
 """Test dates app."""
+
 import pytest
 
 from dates import calculate_days_between, get_date_from

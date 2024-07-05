@@ -1,4 +1,5 @@
 """Generate a random themed string."""
+
 from __future__ import annotations
 
 import argparse

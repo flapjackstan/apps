@@ -39,7 +39,7 @@ def main(db_name: str, num_records: int) -> None:
         db_name (str): Name of the database (either 'rappers' or 'simpsons').
         num_records (int): Number of records to return.
     """
-    engine = create_engine("sqlite:///./assets/names.db")
+    engine = create_engine("sqlite:////Users/elmer/Documents/dev/apps/assets/names.db")
     SessionLocal = sessionmaker(bind=engine)
     session = SessionLocal()
 

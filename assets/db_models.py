@@ -1,8 +1,7 @@
 """DDL for random names app."""
 
 from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 engine = create_engine("sqlite:///names.db", echo=True)
 Base = declarative_base()
@@ -73,20 +72,16 @@ SIMPSONS = [
 def main():
     """RUN DDL."""
     Base.metadata.create_all(engine)
-    # Set up the session
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Create Product instances
     rappers = [Rappers(name=name) for name in RAPPERS]
     simpsons = [Simpsons(name=name) for name in SIMPSONS]
 
-    # Add and commit the products to the session
     session.add_all(rappers)
     session.add_all(simpsons)
     session.commit()
 
-    # Close the session
     session.close()
 
 

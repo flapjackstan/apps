@@ -1,0 +1,28 @@
+services:
+
+  camargo_postgres_db:
+    container_name: postgresql_db
+    image: postgis/postgis
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      # - ALLOW_IP_RANGE=0.0.0.0/0
+      # Add extensions you need to be enabled by default in the DB. Default are the five specified below
+      - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+    ports:
+      - 80:80
+    depends_on:
+      - camargo_postgres_db

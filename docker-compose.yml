@@ -1,7 +1,7 @@
 services:
 
   camargo_postgres_db:
-    container_name: postgresql_db
+    container_name: postgresql_db # this is the host name when connecting via pgadmin/psql
     image: postgis/postgis
     restart: always
     ports:

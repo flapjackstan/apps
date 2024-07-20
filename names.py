@@ -9,7 +9,7 @@ from typing import TypeVar
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
-from assets.db_models import Rappers, Simpsons
+from assets.sqlite_models import Rappers, Simpsons
 
 Base = declarative_base()
 T = TypeVar("T", bound=Base)

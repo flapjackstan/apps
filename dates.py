@@ -52,9 +52,7 @@ def calculate_days_between(date1, date2):
 
     return delta.days
 
-
-def main():
-    """Calculate days between dates."""
+def parse_args() -> argparse.Namespace():
     parser = argparse.ArgumentParser(
         description="Calculate date back or forward from input date or calculate days between two dates",
         epilog='Example: python dates.py "2024-05-28" 70 "forward" OR python dates.py "2024-05-28" "2024-06-28"',
@@ -66,13 +64,16 @@ def main():
     parser.add_argument(
         "direction", type=str, nargs="?", choices=["back", "forward"], help="Direction to move from the input date"
     )
+    return parser.parse_args()
 
-    args = parser.parse_args()
+       
+
+def main():
+    """Calculate days between dates."""
+    args = parse_args()
 
     try:
         days = int(args.days_or_date2)
-        if not args.direction:
-            parser.error("Direction must be specified when providing number of days.")
         result_date = get_date_from(args.date1, days, args.direction)
         print(f"{days} days {args.direction} from {args.date1} is: {result_date}")
     except ValueError:

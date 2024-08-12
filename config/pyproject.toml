@@ -16,6 +16,7 @@ python = "^3.9"
 pygame = "^2.6.0"
 python-dotenv = "^1.0.1"
 holidays = "^0.53"
+sqlalchemy = "^2.0.32"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"

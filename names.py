@@ -15,6 +15,20 @@ Base = declarative_base()
 T = TypeVar("T", bound=Base)
 
 
+def parse_args() -> argparse.Namespace:
+    """Parse args."""
+    parser = argparse.ArgumentParser(
+        description="Fetch random records from the database."
+    )
+    parser.add_argument(
+        "db_name",
+        type=str,
+        help="Name of the database to use (either 'rappers' or 'simpsons').",
+    )
+    parser.add_argument("num_records", type=int, help="Number of records to return.")
+    return parser.parse_args()
+
+
 def get_random_records(session: Session, model: type[T], num_records: int) -> list[T]:
     """
     Get random records from the specified model.
@@ -49,7 +63,9 @@ def main(db_name: str, num_records: int) -> None:
     elif db_name == "simpsons":
         model = Simpsons
     else:
-        raise ValueError("Invalid database name. Choose either 'rappers' or 'simpsons'.")
+        raise ValueError(
+            "Invalid database name. Choose either 'rappers' or 'simpsons'."
+        )
 
     records = get_random_records(session, model, num_records)
     for record in records:
@@ -57,9 +73,5 @@ def main(db_name: str, num_records: int) -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Fetch random records from the database.")
-    parser.add_argument("db_name", type=str, help="Name of the database to use (either 'rappers' or 'simpsons').")
-    parser.add_argument("num_records", type=int, help="Number of records to return.")
-
-    args = parser.parse_args()
+    args = parse_args()
     main(args.db_name, args.num_records)

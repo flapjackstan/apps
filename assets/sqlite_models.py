@@ -43,6 +43,8 @@ RAPPERS = [
     "j-cole",
     "bas",
     "smino",
+    "dr-dre",
+    "snoop-dog",
 ]
 
 SIMPSONS = [
@@ -71,7 +73,7 @@ SIMPSONS = [
 
 def main():
     """RUN DDL."""
-    Base.metadata.create_all(engine)
+    # Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
 

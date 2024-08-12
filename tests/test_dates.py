@@ -19,7 +19,9 @@ def test_get_date_from_back():
 
 def test_get_date_from_invalid_direction():
     """Test dates invalid."""
-    with pytest.raises(ValueError, match="Invalid direction. Please use 'back' or 'forward'."):
+    with pytest.raises(
+        ValueError, match="Invalid direction. Please use 'back' or 'forward'."
+    ):
         get_date_from("2024-05-28", 70, "sideways")
 
 

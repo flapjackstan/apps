@@ -16,8 +16,15 @@ def parse_time(time_str: str) -> int:
 
 def parse_args() -> argparse.Namespace:
     """Parse arguments."""
-    p = argparse.ArgumentParser(description=__doc__, usage="python timer.py --total 1:00 --sub 0:30 1:00 1:15")
-    p.add_argument("--total", type=str, required=True, help="Total time in minutes:seconds for the final timer")
+    p = argparse.ArgumentParser(
+        description=__doc__, usage="python timer.py --total 1:00 --sub 0:30 1:00 1:15"
+    )
+    p.add_argument(
+        "--total",
+        type=str,
+        required=True,
+        help="Total time in minutes:seconds for the final timer",
+    )
     p.add_argument(
         "--sub",
         type=str,

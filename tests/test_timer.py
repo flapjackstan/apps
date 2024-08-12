@@ -9,7 +9,8 @@ def test_timers(mocker, capsys):
     """Timers test with mocks."""
     mock_play_sound = mocker.patch("timer.play_sound")
     mock_parse_args = mocker.patch(
-        "timer.parse_args", return_value=Namespace(total="1:30", sub=["0:30", "1:00", "1:15"])
+        "timer.parse_args",
+        return_value=Namespace(total="1:30", sub=["0:30", "1:00", "1:15"]),
     )
     args = mock_parse_args(["--total", "1:30", "--sub", "0:30", "1:00", "1:15"])
 

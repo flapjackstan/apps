@@ -3,7 +3,9 @@ name = "apps"
 version = "0.1.0"
 description = "collection of apps to use for random purposes"
 authors = ["Elmer Camargo"]
-
+packages = [
+    { include = "dates.py" },
+]
 
 [tool.poetry.scripts]
 timer = "timer:main"
@@ -17,6 +19,7 @@ pygame = "^2.6.0"
 python-dotenv = "^1.0.1"
 holidays = "^0.53"
 sqlalchemy = "^2.0.32"
+timer-py = "^2.5.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"

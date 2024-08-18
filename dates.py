@@ -54,6 +54,7 @@ def calculate_days_between(date1, date2):
 
 
 def parse_args() -> argparse.Namespace:
+    """Get args using common parse_args function."""
     parser = argparse.ArgumentParser(
         description="Calculate date back or forward from input date or calculate days between two dates",
         epilog='Example: python dates.py "2024-05-28" 70 "forward" OR python dates.py "2024-05-28" "2024-06-28"',

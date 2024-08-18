@@ -17,9 +17,7 @@ T = TypeVar("T", bound=Base)
 
 def parse_args() -> argparse.Namespace:
     """Parse args."""
-    parser = argparse.ArgumentParser(
-        description="Fetch random records from the database."
-    )
+    parser = argparse.ArgumentParser(description="Fetch random records from the database.")
     parser.add_argument(
         "db_name",
         type=str,
@@ -63,9 +61,7 @@ def main(db_name: str, num_records: int) -> None:
     elif db_name == "simpsons":
         model = Simpsons
     else:
-        raise ValueError(
-            "Invalid database name. Choose either 'rappers' or 'simpsons'."
-        )
+        raise ValueError("Invalid database name. Choose either 'rappers' or 'simpsons'.")
 
     records = get_random_records(session, model, num_records)
     for record in records:

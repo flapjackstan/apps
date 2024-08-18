@@ -1,15 +1,15 @@
-import holidays
+"""Get next federal holiday."""
+
 from datetime import datetime
 
+import holidays
 
-def get_next_federal_holiday():
+
+def get_next_federal_holiday() -> str:
     """
-    Retrieve the next federal holiday in the US, its day of the week,
-    and the number of days until that date.
+    Retrieve the next federal holiday in the US.
 
-    Returns:
-        str: The next federal holiday date, name, day of the week,
-             and the number of days until the holiday.
+    Its day of the week, and the number of days until that date.
     """
     # Get US federal holidays for the current year
     us_holidays = holidays.US(years=datetime.now().year)
@@ -34,8 +34,9 @@ def get_next_federal_holiday():
 
 def main():
     """
-    Main function to print the next federal holiday, its day of the week,
-    and the number of days until that date.
+    Print the next federal holiday.
+
+    Its day of the week and the number of days until that date.
     """
     print(get_next_federal_holiday())
 

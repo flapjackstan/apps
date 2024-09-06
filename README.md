@@ -10,3 +10,5 @@ Collection of apps that I use for different purposes and have saved as an `alias
 
 `holiday` - Print the closest federal holiday from today.
 
+`lotto` - Provided a list of space seperated names, randomly select members. Useful for group project brainstorm sessions.
+

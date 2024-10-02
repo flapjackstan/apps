@@ -1,6 +1,10 @@
+"""Random picker app."""
 import argparse
 import random
+
+
 def parse_args() -> argparse.Namespace:
+    """Get inputs."""
     # Create the parser
     parser = argparse.ArgumentParser(
         description="Randomly select names from a list until all are selected.",
@@ -19,13 +23,14 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
+    """Run application in interactive mode or cli mode."""
     args = parse_args()
     # Check if we're in interactive mode
     if args.interactive or not args.names:
         print("Entering interactive mode...")
         names_input = input("Enter names separated by spaces: ")
         args.names = names_input.split()
-        shuffle_input = input("Shuffle the list before selection? (y/n): ").lower() == 'y'
+        shuffle_input = input("Shuffle the list before selection? (y/n): ").lower() == "y"
         args.shuffle = shuffle_input
 
     # Validate names input
@@ -46,9 +51,10 @@ def main():
         selected_names.append(selected_name)
         args.names.remove(selected_name)
         input("Press Enter for next name.")
-    
+
     print("\nAll names have been selected:")
     print(", ".join(selected_names))
+
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,5 @@
 """Random picker app."""
+
 import argparse
 import random
 

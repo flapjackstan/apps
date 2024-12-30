@@ -1,8 +1,8 @@
 import argparse
-from typing import Dict, Tuple
-import yfinance as yf
+
 import pandas as pd
-from pprint import pprint
+import yfinance as yf
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -18,7 +18,8 @@ def parse_args() -> argparse.Namespace:
 
     return parser.parse_args()
 
-def get_annual_dividends(ticker: str) -> Dict[int, float]:
+
+def get_annual_dividends(ticker: str) -> dict[int, float]:
     """
     Get the annual dividend amounts for the last 20 years for a given stock ticker.
 
@@ -44,7 +45,8 @@ def get_annual_dividends(ticker: str) -> Dict[int, float]:
 
     return annual_dividends
 
-def calculate_growth_rate(annual_dividends: Dict[int, float]) -> Dict[int, float]:
+
+def calculate_growth_rate(annual_dividends: dict[int, float]) -> dict[int, float]:
     """
     Calculate the year-by-year growth rate of annual dividends.
 
@@ -73,7 +75,8 @@ def calculate_growth_rate(annual_dividends: Dict[int, float]) -> Dict[int, float
 
     return growth_rates
 
-def format_output(annual_dividends: Dict[int, float], growth_rates: Dict[int, float]) -> None:
+
+def format_output(annual_dividends: dict[int, float], growth_rates: dict[int, float]) -> None:
     """
     Format and print the annual dividends and growth rates with custom formatting.
 
@@ -100,6 +103,7 @@ def format_output(annual_dividends: Dict[int, float], growth_rates: Dict[int, fl
 
         print(f"Year: {year}, Dividend: {dividend_str}, Growth Rate: {growth_rate_str}")
 
+
 def main() -> None:
     args = parse_args()
 
@@ -112,6 +116,7 @@ def main() -> None:
     else:
         growth_rates = calculate_growth_rate(annual_dividends)
         format_output(annual_dividends, growth_rates)
+
 
 if __name__ == "__main__":
     main()

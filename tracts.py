@@ -1,7 +1,6 @@
 """
 Tool to download census tract data with the assumption that data gets put on postgres and is overwritten when a new variable is included.
 
-
 Good Census Related Reads
 https://www2.census.gov/geo/tiger/
 https://pypi.org/project/census/
@@ -18,17 +17,14 @@ TODO:
 
 """
 
-from pathlib import Path
 import argparse
-from dataclasses import dataclass, field
 import csv
 import os
-from typing import Tuple
-import re
+from dataclasses import dataclass, field
 
-from dotenv import load_dotenv
 import requests
 from census import Census
+from dotenv import load_dotenv
 from geopandas import GeoDataFrame, read_file
 from pandas import DataFrame, merge
 
@@ -71,11 +67,10 @@ class CensusMiddleWare:
     @staticmethod
     def get_state_county_fips_using_county_name(county: str) -> Fips:
         """
-        Function to return a dict of FIPS codes (keys) of U.S. counties (values)
+        Function to return a dict of FIPS codes (keys) of U.S. counties (values).
 
         https://gist.github.com/cjwinchester/a8ff5dee9c07d161bdf4
         """
-        d = {}
         r = requests.get("http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt")
         reader = csv.reader(r.text.splitlines(), delimiter=",")
         for line in reader:
@@ -86,11 +81,36 @@ class CensusMiddleWare:
 
 
 class CensusDownloader:
+    """
+    A class for downloading census data and geography information.
+
+    Args:
+        input (CensusMiddleWare): An instance of the CensusMiddleWare class.
+
+    Attributes
+    ----------
+        api (Census): An instance of the Census class.
+        input (CensusMiddleWare): The input object.
+
+    Methods
+    -------
+        get_geography(): Retrieves the geography data for a specific county.
+        get_census(): Fetches census data based on the specified variables and returns a DataFrame.
+        get_data(): Retrieves data from geography and census sources, merges them, and saves the result as a GeoJSON file.
+    """
+
     def __init__(self, input: CensusMiddleWare) -> None:
         self.api = Census(input.key)
         self.input = input
 
     def get_geography(self) -> GeoDataFrame:
+        """
+        Retrieve the geography data for a specific county.
+
+        Returns
+        -------
+            GeoDataFrame: The geography data for the county.
+        """
         ca_tracts = read_file(
             f"https://www2.census.gov/geo/tiger/TIGER{self.input.raw_input.year}/TRACT/tl_{self.input.raw_input.year}_{self.input.fips.state}_tract.zip"
         )
@@ -103,6 +123,13 @@ class CensusDownloader:
         return county_tracts
 
     def get_census(self) -> DataFrame:
+        """
+        Fetch census data based on the specified variables and returns a DataFrame.
+
+        Returns
+        -------
+            DataFrame: The census data as a pandas DataFrame.
+        """
         for key, value in self.input.variables.items():
             if key == "ACS":
                 print("Fetching ACS Data")
@@ -129,14 +156,21 @@ class CensusDownloader:
                         year=self.input.raw_input.year,
                     )
                 )
-        
-        data = merge(acs_data, subject_data, on=["state","county","tract"])
+
+        data = merge(acs_data, subject_data, on=["state", "county", "tract"])
         snake_names = [key for inner_dict in CENSUS_VARIABLES.values() for key in inner_dict.keys()]
         source_names = [key for inner_dict in CENSUS_VARIABLES.values() for key in inner_dict.values()]
         rename_dict = dict(zip(source_names, snake_names))
         return data.rename(columns=rename_dict)
 
     def get_data(self) -> None:
+        """
+        Retrieve data from the geography and census sources, merges them, and saves the result as a GeoJSON file.
+
+        Returns
+        -------
+            None
+        """
         geography = self.get_geography()
         census_data = self.get_census()
 
@@ -152,8 +186,8 @@ def parse_args() -> argparse.Namespace:
     """Parse arguments."""
     p = argparse.ArgumentParser(
         description="Download census tract data to a geojson file.",
-        usage="python tracts.py --state 'CA' --county 'Los Angeles' --year 2021"
-        epilog="Uses Tiger and Census API.",
+        usage="python tracts.py --state 'CA' --county 'Los Angeles' --year 2021",
+        epilog="Uses Tiger and Census API",
     )
     p.add_argument("--state", type=str, required=True, help="state in which tracts are in.")
     p.add_argument("--county", type=str, required=True, help="county in which tracts are in.")

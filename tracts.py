@@ -1,5 +1,7 @@
 """
-Tool to download census tract data with the assumption that data gets put on postgres and is overwritten when a new variable is included.
+Tool to download census tract data.
+
+Assumption that data gets put on postgres and is overwritten when a new variable is included.
 
 Good Census Related Reads
 https://www2.census.gov/geo/tiger/
@@ -13,7 +15,9 @@ https://api.census.gov/data/2022/acs/acs5/variables.html
 TODO:
 - argparse only takes in year, state, and county
 - hardcoded census variables with intuitive way on how to add to it
-- double check if theres a way to add like a post_init to argparse.Namespace creation that can do so cleaning and transformations
+- double check if theres a way to add like a post_init to argparse.Namespace creation that
+  can do so cleaning and transformations
+
 
 """
 
@@ -44,12 +48,16 @@ CENSUS_VARIABLES = {
 
 @dataclass
 class Fips:
+    """Simple dataclass for easy access to FIPS."""
+
     state: str
     county: str
 
 
 @dataclass
 class CensusMiddleWare:
+    """Middleware between argparse and actual census app."""
+
     raw_input: argparse.Namespace
     variables: dict
 
@@ -58,16 +66,18 @@ class CensusMiddleWare:
     fips: Fips = field(init=False)
 
     def __post_init__(self):
+        """Clean, validate, and make calculated variables."""
         # clean and validate
         pass
         # derived
         self.fips = self.get_state_county_fips_using_county_name(self.raw_input.county)
 
-    # static because it doesnt need access to class attributes or instance attributes but still used in context of Census stuff.
+    # static because it doesnt need access to class attributes or instance attributes
+    # but still used in context of Census stuff.
     @staticmethod
     def get_state_county_fips_using_county_name(county: str) -> Fips:
         """
-        Function to return a dict of FIPS codes (keys) of U.S. counties (values).
+        Return a dict of FIPS codes (keys) of U.S. counties (values).
 
         https://gist.github.com/cjwinchester/a8ff5dee9c07d161bdf4
         """
@@ -85,23 +95,23 @@ class CensusDownloader:
     A class for downloading census data and geography information.
 
     Args:
-        input (CensusMiddleWare): An instance of the CensusMiddleWare class.
+    app_input (CensusMiddleWare): An instance of the CensusMiddleWare class.
 
     Attributes
     ----------
-        api (Census): An instance of the Census class.
-        input (CensusMiddleWare): The input object.
+    api (Census): An instance of the Census class.
+    app_input (CensusMiddleWare): The app_input object.
 
     Methods
     -------
-        get_geography(): Retrieves the geography data for a specific county.
-        get_census(): Fetches census data based on the specified variables and returns a DataFrame.
-        get_data(): Retrieves data from geography and census sources, merges them, and saves the result as a GeoJSON file.
+    get_geography(): Retrieves the geography data for a specific county.
+    get_census(): Fetches census data based on the specified variables and returns a DataFrame.
+    get_data(): Retrieves data from geography and census sources, merges them, and saves the result as a GeoJSON file.
     """
 
-    def __init__(self, input: CensusMiddleWare) -> None:
-        self.api = Census(input.key)
-        self.input = input
+    def __init__(self, app_input: CensusMiddleWare) -> None:
+        self.api = Census(app_input.key)
+        self.app_input = app_input
 
     def get_geography(self) -> GeoDataFrame:
         """
@@ -112,9 +122,9 @@ class CensusDownloader:
             GeoDataFrame: The geography data for the county.
         """
         ca_tracts = read_file(
-            f"https://www2.census.gov/geo/tiger/TIGER{self.input.raw_input.year}/TRACT/tl_{self.input.raw_input.year}_{self.input.fips.state}_tract.zip"
+            f"https://www2.census.gov/geo/tiger/TIGER{self.app_input.raw_input.year}/TRACT/tl_{self.app_input.raw_input.year}_{self.app_input.fips.state}_tract.zip"
         )
-        county_tracts = ca_tracts.query("COUNTYFP == @self.input.fips.county")  # using @ is like f-strings
+        county_tracts = ca_tracts.query("COUNTYFP == @self.app_input.fips.county")  # using @ is like f-strings
 
         county_tracts["TOTAL_AREA_SQMETER"] = county_tracts["ALAND"] + county_tracts["AWATER"]
         county_tracts["CENTROID_LONG"] = county_tracts.centroid.x
@@ -130,17 +140,17 @@ class CensusDownloader:
         -------
             DataFrame: The census data as a pandas DataFrame.
         """
-        for key, value in self.input.variables.items():
+        for key, value in self.app_input.variables.items():
             if key == "ACS":
                 print("Fetching ACS Data")
                 variables = [v for k, v in value.items()]
                 acs_data = DataFrame(
                     self.api.acs5.state_county_tract(
                         fields=variables,
-                        state_fips=self.input.fips.state,
-                        county_fips=self.input.fips.county,
+                        state_fips=self.app_input.fips.state,
+                        county_fips=self.app_input.fips.county,
                         tract="*",
-                        year=int(self.input.raw_input.year),
+                        year=int(self.app_input.raw_input.year),
                     )
                 )
 
@@ -150,10 +160,10 @@ class CensusDownloader:
                 subject_data = DataFrame(
                     self.api.acs5st.state_county_tract(
                         fields=variables,
-                        state_fips=self.input.fips.state,
-                        county_fips=self.input.fips.county,
+                        state_fips=self.app_input.fips.state,
+                        county_fips=self.app_input.fips.county,
                         tract="*",
-                        year=self.input.raw_input.year,
+                        year=self.app_input.raw_input.year,
                     )
                 )
 

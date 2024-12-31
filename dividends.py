@@ -1,3 +1,4 @@
+"""Analyze a dividend stock."""
 import argparse
 
 import pandas as pd
@@ -5,10 +6,11 @@ import yfinance as yf
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse args base."""
     parser = argparse.ArgumentParser(
         description="Get up to the last 20 years of annual dividend amounts and growth rates.",
-        epilog="Thank you for using the dividend info script!",
-        usage="python dividends.py ...",
+        epilog="Useful for evaluating a stock for a mid to long term trade.",
+        usage="python dividends.py TGT",
     )
 
     # Define arguments
@@ -51,11 +53,11 @@ def calculate_growth_rate(annual_dividends: dict[int, float]) -> dict[int, float
     Calculate the year-by-year growth rate of annual dividends.
 
     Args:
-        annual_dividends (Dict[int, float]): A dictionary with years as keys and aggregated annual dividend amounts as values.
+    annual_dividends (Dict[int, float]): A dict with years as keys and aggregated annual dividend amounts as values.
 
     Returns
     -------
-        Dict[int, float]: A dictionary with years as keys and growth rates as values.
+    Dict[int, float]: A dictionary with years as keys and growth rates as values.
     """
     years = sorted(annual_dividends.keys())
     growth_rates = {}
@@ -81,8 +83,8 @@ def format_output(annual_dividends: dict[int, float], growth_rates: dict[int, fl
     Format and print the annual dividends and growth rates with custom formatting.
 
     Args:
-        annual_dividends (Dict[int, float]): A dictionary with years as keys and aggregated annual dividend amounts as values.
-        growth_rates (Dict[int, float]): A dictionary with years as keys and growth rates as values.
+    annual_dividends (Dict[int, float]): A dict with years as keys and aggregated annual dividend amounts as values.
+    growth_rates (Dict[int, float]): A dict with years as keys and growth rates as values.
     """
     for year in sorted(annual_dividends.keys()):
         dividend = annual_dividends[year]
@@ -105,6 +107,7 @@ def format_output(annual_dividends: dict[int, float], growth_rates: dict[int, fl
 
 
 def main() -> None:
+    """Run main script."""
     args = parse_args()
 
     ticker = args.ticker

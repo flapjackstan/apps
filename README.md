@@ -15,27 +15,3 @@ Collection of apps that I use for different purposes and have saved as an `alias
 `dividends` - A script to fetch and display up to the last 20 years of annual dividend amounts and growth rates for a given stock ticker. Useful for dividend investing stategies.
 
 `tracts` - A tool to download census tract data and save it as a GeoJSON file. It uses the Census and Tiger APIs to fetch data for a specified state, county, and year. The data includes geographic information and census variables such as median age, total population, and median income (adjust in script for now). The script requires a Census API key to function.
-
-`home` - Make a summary about a home. See below. Dont commit me!!
-
-TURN THIS INTO ARGPARSE APP!
-	Home Loan 			580,000
-	P&I				2329.58
-	Home Sqft 			818
-	Price per Sqft = 		Home Loan / Home Sqft
-	Price per Sqft = 		709.05
-
-	Office Sqft			121
-	Office to Home =			121/818 ~ 14.8%
-	Monthly for Office =		344.78
-	Office Worth = 			85,795.04
-
-	Garage Sqft =			165
-	Garage to Home =			165/818 ~ 20.2%
-	Monthly for Garage =		470.58
-	Garage Worth =			117,067.50
-
-
-	Cumulative Payment 05/24	54,091
-	Percent Owned			Cumulative	/ Home Loan
-	Percent House Owned		9.33%

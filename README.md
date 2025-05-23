@@ -12,6 +12,6 @@ Collection of apps that I use for different purposes and have saved as an `alias
 
 `lotto` - Provided a list of space seperated names, randomly select members. Useful for group project brainstorm sessions.
 
-`dividends` - A script to fetch and display up to the last 20 years of annual dividend amounts and growth rates for a given stock ticker. Useful for dividend investing stategies.
-
 `tracts` - A tool to download census tract data and save it as a GeoJSON file. It uses the Census and Tiger APIs to fetch data for a specified state, county, and year. The data includes geographic information and census variables such as median age, total population, and median income (adjust in script for now). The script requires a Census API key to function.
+
+`interview` - Questions to ask an interview prep buddy.

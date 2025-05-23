@@ -24,7 +24,6 @@ census = "^0.8.22"
 geopandas = "^1.0.1"
 pandas = "^2.2.3"
 setuptools = "^75.3.0"
-yfinance = "^0.2.51"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"

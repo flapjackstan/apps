@@ -3,6 +3,9 @@ name = "apps"
 version = "0.1.0"
 description = "collection of apps to use for random purposes"
 authors = ["Elmer Camargo"]
+packages = [
+    { include = "holiday" },
+]
 
 [tool.poetry.scripts]
 holiday = "holiday:run"

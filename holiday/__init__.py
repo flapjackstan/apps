@@ -1,1 +1,1 @@
-from holiday import main
+from holiday import run

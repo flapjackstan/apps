@@ -32,7 +32,7 @@ def get_next_federal_holiday() -> str:
     )
 
 
-def main():
+def run():
     """
     Print the next federal holiday.
 
@@ -42,4 +42,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run()

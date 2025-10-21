@@ -5,6 +5,7 @@ description = "collection of apps to use for random purposes"
 authors = ["Elmer Camargo"]
 packages = [
     { include = "dates.py" },
+    { include = "holiday/holiday.py" },
 ]
 
 [tool.poetry.scripts]

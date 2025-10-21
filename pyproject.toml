@@ -9,7 +9,7 @@ packages = [
 
 [tool.poetry.scripts]
 timer = "timer:main"
-holiday = "holiday:main"
+holiday = ".holiday:main"
 dates = "dates:main"
 names = "names:main"
 

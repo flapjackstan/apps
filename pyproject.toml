@@ -8,10 +8,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-timer = "timer:main"
-holiday = ".holiday:main"
-dates = "dates:main"
-names = "names:main"
+holiday = "holiday:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"

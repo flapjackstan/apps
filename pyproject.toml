@@ -7,7 +7,7 @@ packages = [
     { include = "holiday" },
 ]
 
-[tool.poetry.scripts]
+[project.scripts]
 holiday = "holiday:run"
 
 [tool.poetry.dependencies]

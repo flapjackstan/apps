@@ -5,7 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "ansible-vault>=4.1.0",
     "holidays>=0.83",
+    "python-dotenv>=1.2.1",
+    "sqlalchemy>=2.0.44",
     "typer>=0.20.0",
 ]
 

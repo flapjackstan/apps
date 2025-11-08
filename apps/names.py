@@ -14,7 +14,7 @@ import typer
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
-from assets.sqlite_models import Rappers, Simpsons
+from apps.assets.sqlite_models import Rappers, Simpsons
 
 app = typer.Typer(help="Fetch random records from a themed SQLite database.")
 

@@ -3,7 +3,7 @@ name = "apps"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = [
     "ansible-vault>=4.1.0",
     "holidays>=0.83",

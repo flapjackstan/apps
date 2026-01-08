@@ -13,8 +13,11 @@ For some reason I cant run regular `uv run python apps/apps.py`
 These scripts should be runnable within `uvx` for example
 
 `uvx --from git+https://github.com/flapjackstan/apps apps --help`
+
 `uvx --from git+https://github.com/flapjackstan/apps apps holiday next`
+
 `uvx --from git+https://github.com/flapjackstan/apps apps dates shift 2025-08-21 365 forward`
+
 `uvx --from git+https://github.com/flapjackstan/apps apps dates between 2025-11-08 2026-08-21`
 
 # Archived apps

@@ -5,7 +5,9 @@ Collection of apps that I use for different purposes and have saved as an `alias
 For some reason I cant run regular `uv run python apps/apps.py`
 
 `holiday` - Print the closest federal holiday from today.
+
 `dates` - Date calculator with two uses. 1) Provided a spcific date calculate the date ahead or back n days. 2) Calculate the days between 2 dates. Used this as like a reminder of how many days until my next vacation and little stuff like that.
+
 `names` - Generates a random name from an sqlite db dependent on the theme you pass it (simpsons|rappers). I use this to demo some random examples of processes.
 
 # UVX runs

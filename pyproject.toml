@@ -6,14 +6,26 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "ansible-vault>=4.1.0",
+    "beautifulsoup4>=4.13.0",
+    "census>=0.8.22",
+    "geopandas>=1.0.0",
     "holidays>=0.83",
+    "pandas>=2.2.0",
+    "pygame>=2.6.1",
     "python-dotenv>=1.2.1",
+    "requests>=2.32.0",
     "sqlalchemy>=2.0.44",
     "typer>=0.20.0",
 ]
 
 [project.scripts]
 apps = "apps.apps:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-mock>=3.14.0",
+]
 
 [build-system]
 requires = ["uv_build>=0.9.5,<0.10.0"]
